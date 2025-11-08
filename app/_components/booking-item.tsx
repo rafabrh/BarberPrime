@@ -1,7 +1,6 @@
 import { Badge } from "./ui/badge";
 import { Card } from "./ui/card";
-import { Avatar } from "./ui/avatar";
-import { AvatarImage } from "@radix-ui/react-avatar";
+import { Avatar, AvatarImage } from "./ui/avatar";
 
 interface BookingItemProps {
   serviceName: string;
