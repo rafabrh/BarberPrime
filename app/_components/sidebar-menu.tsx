@@ -15,8 +15,14 @@ import { SheetClose } from "./ui/sheet";
 
 const SidebarMenu = () => {
   const { data: session } = authClient.useSession();
+  const googleAuthEnabled =
+    process.env.NEXT_PUBLIC_GOOGLE_AUTH_ENABLED === "true";
 
   const handleLogin = async () => {
+    if (!googleAuthEnabled) {
+      return;
+    }
+
     await authClient.signIn.social({
       provider: "google",
     });
@@ -46,17 +52,26 @@ const SidebarMenu = () => {
             </div>
           </div>
         ) : (
-          <div className="flex items-center justify-between">
-            <div className="flex h-12 items-center">
-              <p className="text-base font-semibold">Olá. Faça seu login!</p>
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center justify-between">
+              <div className="flex h-12 items-center">
+                <p className="text-base font-semibold">Olá. Faça seu login!</p>
+              </div>
+              <Button
+                onClick={handleLogin}
+                disabled={!googleAuthEnabled}
+                className="gap-3 rounded-full px-6 py-3"
+              >
+                <span className="text-sm font-semibold">Login</span>
+                <LogInIcon className="size-4" />
+              </Button>
             </div>
-            <Button
-              onClick={handleLogin}
-              className="gap-3 rounded-full px-6 py-3"
-            >
-              <span className="text-sm font-semibold">Login</span>
-              <LogInIcon className="size-4" />
-            </Button>
+            {!googleAuthEnabled ? (
+              <p className="text-muted-foreground text-xs">
+                Configure GOOGLE_CLIENT_ID e GOOGLE_CLIENT_SECRET para habilitar
+                o login social.
+              </p>
+            ) : null}
           </div>
         )}
       </div>
@@ -132,18 +147,20 @@ const SidebarMenu = () => {
       <Separator />
 
       {/* Logout Button */}
-      <SheetClose asChild>
-        <Button
-          onClick={handleLogout}
-          variant="ghost"
-          className="w-full justify-start gap-3 rounded-full px-5 py-3"
-        >
-          <LogOutIcon className="size-4" />
-          <span className="text-muted-foreground text-sm font-medium">
-            Sair da conta
-          </span>
-        </Button>
-      </SheetClose>
+      {session?.user ? (
+        <SheetClose asChild>
+          <Button
+            onClick={handleLogout}
+            variant="ghost"
+            className="w-full justify-start gap-3 rounded-full px-5 py-3"
+          >
+            <LogOutIcon className="size-4" />
+            <span className="text-muted-foreground text-sm font-medium">
+              Sair da conta
+            </span>
+          </Button>
+        </SheetClose>
+      ) : null}
     </div>
   );
 };
