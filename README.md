@@ -1,36 +1,163 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <h1>💈 BarberPrime</h1>
+  <p><strong>Sistema Moderno de Agendamento para Barbearias</strong></p>
+  <p>Aplicação full-stack rápida, organizada e preparada para escalar.</p>
+</div>
 
-## Getting Started
+<hr/>
 
-First, run the development server:
+<h2>🚀 Tecnologias Utilizadas</h2>
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
+<ul>
+  <li><strong>Next.js</strong> (App Router)</li>
+  <li><strong>React</strong></li>
+  <li><strong>Tailwind CSS</strong></li>
+  <li><strong>Shadcn UI</strong></li>
+  <li><strong>Prisma ORM</strong></li>
+  <li><strong>PostgreSQL</strong></li>
+  <li><strong>TypeScript</strong></li>
+  <li>Deploy via <strong>Vercel</strong></li>
+</ul>
+
+<hr/>
+
+<h2>✂️ Funcionalidades</h2>
+
+<ul>
+  <li>Agendamento rápido e responsivo</li>
+  <li>Painel para clientes e profissionais</li>
+  <li>Horários disponíveis em tempo real</li>
+  <li>Gerenciamento de serviços</li>
+  <li>Cadastro e autenticação de usuários</li>
+  <li>Interface moderna e profissional</li>
+  <li>Integração futura com WhatsApp e pagamentos</li>
+</ul>
+
+<hr/>
+
+<h2>🗂️ Estrutura do Projeto</h2>
+
+<pre>
+/app
+  /api
+  /components
+  /hooks
+  /lib
+  /services
+/prisma
+  schema.prisma
+/public
+/styles
+</pre>
+
+<hr/>
+
+<h2>🧩 Como Rodar Localmente</h2>
+
+<ol>
+  <li>Instale as dependências:
+    <pre>pnpm install</pre>
+  </li>
+  <li>Configure o arquivo <code>.env</code>:
+    <pre>DATABASE_URL="postgres://..."</pre>
+  </li>
+  <li>Execute as migrations:
+    <pre>npx prisma migrate dev</pre>
+  </li>
+  <li>Inicie o servidor:
+    <pre>pnpm dev</pre>
+  </li>
+</ol>
+
+<p>Acesse em: <strong>http://localhost:3000</strong></p>
+
+<hr/>
+
+<h2>🧱 Banco de Dados</h2>
+
+<p>Estrutura gerenciada pelo Prisma, com as principais entidades:</p>
+
+<ul>
+  <li><code>User</code></li>
+  <li><code>Service</code></li>
+  <li><code>Appointment</code></li>
+  <li><code>Professional</code></li>
+  <li><code>Barbershop</code></li>
+</ul>
+
+<hr/>
+
+<h2>📦 Deploy</h2>
+
+<ul>
+  <li>Frontend hospedado na <strong>Vercel</strong></li>
+  <li>Banco de dados em <strong>Neon / Supabase / Render</strong></li>
+</ul>
+
+<p><strong>Variáveis necessárias:</strong></p>
+
+<pre>
+DATABASE_URL=
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+</pre>
+
+<hr/>
+
+<h2>🛠️ Scripts Úteis</h2>
+
+<pre>
 pnpm dev
-# or
-bun dev
-```
+pnpm build
+pnpm lint
+npx prisma studio
+</pre>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+<hr/>
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+<h2>🛣️ Roadmap</h2>
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<ul>
+  <li>[ ] Dashboard completo para profissionais</li>
+  <li>[ ] Tema customizável para barbearias</li>
+  <li>[ ] Integração com WhatsApp (Twilio / Z-API)</li>
+  <li>[ ] Sistemas de pagamento (Pix + Cartão)</li>
+  <li>[ ] Multi-tenant (múltiplas unidades)</li>
+  <li>[ ] Plano Premium</li>
+</ul>
 
-## Learn More
+<hr/>
 
-To learn more about Next.js, take a look at the following resources:
+<h2>🤝 Contribuição</h2>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+<p>Fluxo Git do projeto:</p>
+<pre>
+main → produção
+dev  → desenvolvimento
+</pre>
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+<ol>
+  <li>Crie sua branch:
+    <pre>git checkout -b feature/minha-feature</pre>
+  </li>
+  <li>Commit:
+    <pre>git commit -m "feat: minha feature"</pre>
+  </li>
+  <li>Push:
+    <pre>git push origin feature/minha-feature</pre>
+  </li>
+  <li>Abra um Pull Request</li>
+</ol>
 
-## Deploy on Vercel
+<hr/>
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+<h2>👤 Autor</h2>
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<p><strong>Rafael (RaFa)</strong><br/>
+Criador e mantenedor do BarberPrime.</p>
+
+<hr/>
+
+<div align="center">
+  <p><strong>💈 BarberPrime — agendamento profissional, rápido e elegante.</strong></p>
+</div>
