@@ -12,12 +12,7 @@ const INITIAL_MESSAGES = [
   {
     id: "system-welcome",
     role: "system" as const,
-    parts: [
-      {
-        type: "text" as const,
-        text: "Seu assistente de agendamentos está online.",
-      },
-    ],
+    parts: [{ type: "text" as const, text: "Seu assistente de agendamentos está online." }],
   },
   {
     id: "assistant-welcome",
@@ -25,7 +20,7 @@ const INITIAL_MESSAGES = [
     parts: [
       {
         type: "text" as const,
-        text: "Olá! Sou o Aparatus, seu assistente pessoal.\n\nEstou aqui para te auxiliar a agendar seu corte ou barba, encontrar as barbearias disponíveis perto de você e responder às suas dúvidas.",
+        text: "Olá! Sou o Shark, seu assistente pessoal.\n\nEstou aqui para te auxiliar a agendar seu corte ou barba, encontrar as barbearias disponíveis perto de você e responder às suas dúvidas.",
       },
     ],
   },
@@ -34,28 +29,22 @@ const INITIAL_MESSAGES = [
 export default function ChatPage() {
   const [message, setMessage] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const { messages, sendMessage, status } = useChat({
-    transport: new DefaultChatTransport({
-      api: "/api/chat",
-    }),
+
+  const { messages, sendMessage, status, error } = useChat({
+    transport: new DefaultChatTransport({ api: "/api/chat" }),
   });
 
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
   useEffect(() => {
-    scrollToBottom();
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (message.trim()) {
-      sendMessage({
-        text: message,
-      });
-      setMessage("");
-    }
+    const text = message.trim();
+    if (!text) return;
+
+    sendMessage({ text });
+    setMessage("");
   };
 
   const isLoading = status === "streaming" || status === "submitted";
@@ -67,10 +56,17 @@ export default function ChatPage() {
           <ChevronLeft className="size-6 shrink-0" />
         </Link>
         <p className="font-merriweather text-[20px] leading-[1.4] tracking-[-1px] text-nowrap whitespace-pre text-[var(--foreground)] italic">
-          Aparatus
+          BarberPrime
         </p>
         <div className="flex items-center justify-end gap-[15px]" />
       </div>
+
+      {/* Produção: nunca deixe erro “sumir” */}
+      {error?.message ? (
+        <div className="px-5 pt-3 text-sm text-red-500">
+          {error.message}
+        </div>
+      ) : null}
 
       <div className="w-full flex-1 overflow-y-auto pb-24 [&::-webkit-scrollbar]:hidden">
         {messages.length === 0
@@ -81,9 +77,7 @@ export default function ChatPage() {
               <ChatMessage
                 key={msg.id}
                 message={msg}
-                isStreaming={
-                  status === "streaming" && index === messages.length - 1
-                }
+                isStreaming={status === "streaming" && index === messages.length - 1}
               />
             ))}
         <div ref={messagesEndRef} />
