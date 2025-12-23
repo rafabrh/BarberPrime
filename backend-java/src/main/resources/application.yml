@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: barberprime-backend
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/barberprime}
+    username: ${DATABASE_USER:barberprime}
+    password: ${DATABASE_PASSWORD:barberprime}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+        jdbc.lob.non_contextual_creation: true
+    show-sql: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+server:
+  port: ${PORT:8080}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      probes:
+        enabled: true
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+logging:
+  level:
+    org.springframework: INFO
+    com.shark.barberprime: DEBUG
+
+springdoc:
+  api-docs:
+    enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
